@@ -25,8 +25,8 @@ abstract class BasePlugin(private val isEnableLogging: Boolean = true) : Plugin<
         //Apply plugins
 
         pluginList.forEach(target::applyPlugins)
-
         beforeApply(target)
+
         //Apply dependencies
         target.dependencies {
             implementations.forEach(::implementation)

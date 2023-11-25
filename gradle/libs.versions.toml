@@ -1,6 +1,8 @@
 [versions]
 agp = "8.1.4"
 gradle-kotlin-dsl-plugins = "4.2.1"
+hilt-android-gradle-plugin = "2.48.1"
+javapoet = "1.13.0"
 org-jetbrains-kotlin-android = "1.9.0"
 core-ktx = "1.9.0"
 junit = "4.13.2"
@@ -14,6 +16,10 @@ kotlin = "1.9.0"
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 gradle-kotlin-dsl-plugins = { module = "org.gradle.kotlin:gradle-kotlin-dsl-plugins", version.ref = "gradle-kotlin-dsl-plugins" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt-android-gradle-plugin" }
+hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt-android-gradle-plugin" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt-android-gradle-plugin" }
+javapoet = { module = "com.squareup:javapoet", version.ref = "javapoet" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
@@ -28,6 +34,8 @@ build-logic-kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotl
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 com-android-library = { id = "com.android.library", version.ref = "agp" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
+kotlin-kapt = { id = "kotlin-kapt" }
+dagger-hilt = { id = "com.google.dagger.hilt.android" }
 
 [bundles]
 
