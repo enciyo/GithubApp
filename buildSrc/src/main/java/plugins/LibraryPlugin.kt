@@ -5,18 +5,20 @@ import libs
 import librariesExt
 import configure
 import org.gradle.api.Project
+import plugins.common.DaggerHiltPlugin
 
 class LibraryPlugin : BasePlugin(isEnableLogging = true) {
 
     override val pluginList: List<Any>
         get() = listOf(
             libs.plugins.com.android.library,
-            libs.plugins.org.jetbrains.kotlin.android
+            libs.plugins.org.jetbrains.kotlin.android,
+            DaggerHiltPlugin::class.java
         )
 
     override val implementations: List<Any>
         get() = listOf(
-            libs.core.ktx
+            libs.core.ktx,
         )
 
     override fun beforeApply(target: Project) {
