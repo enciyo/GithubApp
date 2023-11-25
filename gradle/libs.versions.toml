@@ -15,9 +15,13 @@ material = "1.10.0"
 constraintlayout = "2.1.4"
 kotlin = "1.9.0"
 retrofit = "2.9.0"
+room-runtime = "2.6.0"
 soloader = "0.10.5"
 
 [libraries]
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room-runtime" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room-runtime" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room-runtime" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 flipper = { module = "com.facebook.flipper:flipper", version.ref = "flipper" }
 flipper-network-plugin = { module = "com.facebook.flipper:flipper-network-plugin", version.ref = "flipper" }

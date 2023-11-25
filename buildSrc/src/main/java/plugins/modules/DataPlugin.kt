@@ -17,7 +17,13 @@ class DataPlugin : BasePlugin(){
     override val implementations: List<Any> get() = listOf(
         libs.retrofit,
         libs.retrofit.converter.moshi,
-        libs.moshi.kotlin.nullsafe
+        libs.moshi.kotlin.nullsafe,
+        libs.androidx.room.runtime,
+        libs.androidx.room.ktx
+    )
+
+    override val kapts: List<Any> get() = listOf(
+        libs.androidx.room.compiler
     )
 
     override fun beforeApply(target: Project) {

@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Build
 import com.enciyo.shared.runWithMinSdk
 import com.facebook.flipper.android.AndroidFlipperClient
+import com.facebook.flipper.plugins.crashreporter.CrashReporterPlugin
+import com.facebook.flipper.plugins.databases.DatabasesFlipperPlugin
 import com.facebook.flipper.plugins.inspector.DescriptorMapping
 import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
 import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
@@ -24,6 +26,8 @@ class FlipperProviderImp @Inject constructor(@ApplicationContext private val con
             val client = AndroidFlipperClient.getInstance(context)
             client.addPlugin(networkInspector)
             client.addPlugin(InspectorFlipperPlugin(context, descriptorMapping))
+            client.addPlugin(DatabasesFlipperPlugin(context))
+            client.addPlugin(CrashReporterPlugin.getInstance())
             client.start()
 
         }
