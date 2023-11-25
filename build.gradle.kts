@@ -1,6 +1,5 @@
 buildscript {
     repositories {
-        // other repositories...
         mavenCentral()
     }
     dependencies {
