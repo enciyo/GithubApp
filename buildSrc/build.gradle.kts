@@ -24,6 +24,5 @@ dependencies {
     implementation(libs.build.logic.kotlin.gradlePlugin)
     implementation(libs.javapoet) //Dagger Hilt Workaround https://github.com/google/dagger/issues/3068
     gradleApi()
-
 }
 
