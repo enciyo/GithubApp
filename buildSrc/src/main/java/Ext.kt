@@ -11,16 +11,16 @@ import org.gradle.plugin.use.PluginDependency
 import plugins.BasePlugin
 import kotlin.reflect.KClass
 
-val BasePlugin.libs: LibrariesForLibs
+internal val BasePlugin.libs: LibrariesForLibs
     get() = target.extensions.getByType<LibrariesForLibs>()
 
-val BasePlugin.applicationExt: ApplicationExtension
+internal val BasePlugin.applicationExt: ApplicationExtension
     get() = target.extensions.getByType<ApplicationExtension>()
 
-val BasePlugin.librariesExt: LibraryExtension
+internal  val BasePlugin.librariesExt: LibraryExtension
     get() = target.extensions.getByType<LibraryExtension>()
 
-fun Project.applyPlugins(any: Any) {
+internal  fun Project.applyPlugins(any: Any) {
     when (any) {
         is String -> pluginManager.apply(any)
         is Class<*> -> pluginManager.apply(any)
@@ -30,19 +30,31 @@ fun Project.applyPlugins(any: Any) {
     }
 }
 
-fun DependencyHandlerScope.implementation(dependencyNotation: Any) {
-    add("implementation", dependencyNotation)
+internal fun BasePlugin.implementation(dependencyNotation: Any) {
+    target.dependencies.add("implementation", dependencyNotation)
 }
 
-fun DependencyHandlerScope.testImplementation(dependencyNotation: Any) {
-    add("testImplementation", dependencyNotation)
+internal fun BasePlugin.debugImplementation(dependencyNotation: Any) {
+    target.dependencies.add("debugImplementation", dependencyNotation)
 }
 
-fun DependencyHandlerScope.androidTestImplementation(dependencyNotation: Any) {
-    add("androidTestImplementation", dependencyNotation)
+internal fun BasePlugin.releaseImplementation(dependencyNotation: Any) {
+    target.dependencies.add("releaseImplementation", dependencyNotation)
 }
 
-fun DependencyHandlerScope.kapt(dependencyNotation: Any) {
-    add("kapt", dependencyNotation)
+internal fun BasePlugin.testImplementation(dependencyNotation: Any) {
+    target.dependencies.add("testImplementation", dependencyNotation)
+}
+
+internal fun BasePlugin.androidTestImplementation(dependencyNotation: Any) {
+    target.dependencies.add("androidTestImplementation", dependencyNotation)
+}
+
+internal fun BasePlugin.kapt(dependencyNotation: Any) {
+    target.dependencies.add("kapt", dependencyNotation)
+}
+
+internal fun BasePlugin.implementationProject(dependencyNotation: Any){
+    target.dependencies.add("implementation", target.dependencies.project(mapOf("path" to ":$dependencyNotation")))
 }
 

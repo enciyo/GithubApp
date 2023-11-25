@@ -28,10 +28,8 @@ abstract class BasePlugin(private val isEnableLogging: Boolean = true) : Plugin<
         beforeApply(target)
 
         //Apply dependencies
-        target.dependencies {
-            implementations.forEach(::implementation)
-            kapts.forEach(::kapt)
-        }
+        implementations.forEach(::implementation)
+        kapts.forEach(::kapt)
         afterApply(target)
 
         if (isEnableLogging)

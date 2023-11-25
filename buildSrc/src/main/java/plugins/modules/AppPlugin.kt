@@ -3,6 +3,8 @@ package plugins.modules
 import libs
 import configure
 import applicationExt
+import implementationProject
+import implementation
 import plugins.common.DaggerHiltPlugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
@@ -30,7 +32,7 @@ class AppPlugin : BasePlugin() {
         applicationExt.configure()
     }
     override fun afterApply(target: Project) {
-        
+        implementationProject(":data")
     }
 
 }
