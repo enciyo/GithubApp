@@ -5,6 +5,7 @@ gradle-kotlin-dsl-plugins = "4.2.1"
 hilt-android-gradle-plugin = "2.48.1"
 javapoet = "1.13.0"
 moshi-kotlin-nullsafe = "1.0.0"
+navigation-fragment-ktx = "2.7.5"
 org-jetbrains-kotlin-android = "1.9.0"
 core-ktx = "1.12.0"
 junit = "4.13.2"
@@ -17,8 +18,15 @@ kotlin = "1.9.0"
 retrofit = "2.9.0"
 room-runtime = "2.6.0"
 soloader = "0.10.5"
+legacy-support-v4 = "1.0.0"
+lifecycle-livedata-ktx = "2.6.2"
+lifecycle-viewmodel-ktx = "2.6.2"
+viewbindingpropertydelegate-full = "1.5.9"
 
 [libraries]
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation-fragment-ktx" }
+androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigation-fragment-ktx" }
+androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation-fragment-ktx" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room-runtime" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room-runtime" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room-runtime" }
@@ -43,6 +51,10 @@ moshi-kotlin-nullsafe = { module = "com.github.sparklexin:moshi-kotlin-nullsafe"
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 soloader = { module = "com.facebook.soloader:soloader", version.ref = "soloader" }
+legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacy-support-v4" }
+lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle-livedata-ktx" }
+lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle-viewmodel-ktx" }
+viewbindingpropertydelegate-full = { module = "com.github.kirich1409:viewbindingpropertydelegate-full", version.ref = "viewbindingpropertydelegate-full" }
 
 
 [plugins]
@@ -51,6 +63,7 @@ com-android-library = { id = "com.android.library", version.ref = "agp" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
 kotlin-kapt = { id = "kotlin-kapt" }
 dagger-hilt = { id = "com.google.dagger.hilt.android" }
+navigation-safeargs-kotlin = { id = "androidx.navigation.safeargs.kotlin" }
 
 [bundles]
 
