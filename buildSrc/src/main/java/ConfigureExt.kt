@@ -14,6 +14,9 @@ fun ApplicationExtension.configure() = (configureBase() as ApplicationExtension)
         versionName = DefaultConfig.versionName
         namespace = DefaultConfig.applicationId
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 fun LibraryExtension.configure(namespace: String) =  configureBase().apply { this.namespace = namespace }
