@@ -8,8 +8,17 @@
     <com.google.android.material.search.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
+        android:focusable="true"
+        android:focusedByDefault="true"
         android:layout_height="match_parent"
         android:hint="@string/search_hint">
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progressBar"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/searches"
@@ -17,6 +26,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
+
+        <TextView
+            android:id="@+id/noData"
+            android:gravity="center_horizontal"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:text="@string/nothing_to_see_here"
+            style="@style/TextAppearance.Material3.TitleMedium"
+            android:layout_height="wrap_content"/>
+
+
     </com.google.android.material.search.SearchView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

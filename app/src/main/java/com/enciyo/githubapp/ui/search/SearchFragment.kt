@@ -1,8 +1,12 @@
 package com.enciyo.githubapp.ui.search
 
 import android.os.Bundle
+import android.os.SystemClock
+import android.view.MotionEvent
 import android.view.View
+import android.widget.EditText
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
@@ -40,9 +44,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(
     }
 
     private val concatAdapter by lazy {
-        ConcatAdapter(
-            searchAdapter
-        )
+        ConcatAdapter(searchAdapter)
     }
 
     private fun onHandleAdapterEvent(event: SearchAdapter.Event) {
@@ -102,7 +104,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(
 
         vm.state.observe(viewLifecycleOwner,){
             searchAdapter.submitList(it.users)
+            binding.noData.isVisible = it.users.isEmpty()
         }
+
+        vm.loading.observe(viewLifecycleOwner){
+            binding.progressBar.isVisible = it
+        }
+
+        binding.searchView.editText.requestFocusWithKeyboard()
     }
 
 
@@ -115,4 +124,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(
         findNavController().popBackStack()
     }
 
+    fun EditText.requestFocusWithKeyboard() {
+        post {
+            dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN, 0f, 0f, 0))
+            dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, 0f, 0f, 0))
+            setSelection(length())
+        }
+    }
 }

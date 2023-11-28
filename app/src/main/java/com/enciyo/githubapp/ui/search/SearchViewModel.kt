@@ -73,7 +73,7 @@ class SearchViewModel @Inject constructor(
         val users: List<User> = listOf(),
         val histories: List<User> = listOf(),
         val isShowFavorites: Boolean = true,
-        val searchKeyword: String = ""
+        val searchKeyword: String = "",
     )
 
     private data class ViewModelState(

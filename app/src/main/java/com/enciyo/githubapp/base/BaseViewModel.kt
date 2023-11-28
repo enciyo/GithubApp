@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.onStart
 
 abstract class BaseViewModel : ViewModel() {
 
-    private val _loading = MutableLiveData<Boolean>()
+    private val _loading = MutableLiveData<Boolean>(false)
     val loading = _loading as LiveData<Boolean>
 
 
@@ -29,9 +29,14 @@ abstract class BaseViewModel : ViewModel() {
                     it.isFailure -> {
                         Log.i("MyLogger", it.exceptionOrNull()?.message.orEmpty())
                     }
-                    it.isSuccess -> consumer.invoke(it.getOrThrow())
+                    it.isSuccess -> {
+                        consumer.invoke(it.getOrThrow())
+                    }
                 }
 
+            }
+            .onEach {
+                if (isShowLoading) _loading.value = false
             }
             .onStart {
                 if (isShowLoading) _loading.value = true
