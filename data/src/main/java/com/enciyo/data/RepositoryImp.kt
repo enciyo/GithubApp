@@ -17,18 +17,9 @@ class RepositoryImp @Inject constructor(
 
     //Only first page cached
     override fun getUsers(page: Int, username: String): Flow<Result<Users>> = flow {
-        if (page == 1) {
-            emit(localDataSource.getUsers())
-        }
-        val remote = remoteDataSource.searchUser(username, page)
-        emit(remote)
-        if (page == 1 && remote.isSuccess) {
-            localDataSource.insertUsers(remote.getOrThrow())
-        }
+        emit(remoteDataSource.searchUser(username, page))
     }
-
-    override fun getFavorites() = localDataSource.getFavorites()
-
+    override fun getFavorites() =   localDataSource.getFavorites()
     override fun favoriteTransactions(user: User, isAdded: Boolean) = flow {
         emit(localDataSource.favoriteTransaction(user, isAdded))
     }

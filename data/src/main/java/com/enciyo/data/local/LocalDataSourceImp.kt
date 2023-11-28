@@ -13,10 +13,12 @@ import com.enciyo.shared.GitDispatchers
 import com.enciyo.shared.annotation.Dispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEmpty
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -51,6 +53,7 @@ class LocalDataSourceImp @Inject constructor(
 
     override fun getFavorites() =
         favorite.getAll()
+            .onEmpty { emit(listOf()) }
             .map {
                 Users(
                     it.map(FavoriteEntity::toUser),
@@ -61,10 +64,12 @@ class LocalDataSourceImp @Inject constructor(
             .toResult()
 
 
+
     private suspend fun <T> toResult(block: suspend CoroutineScope.() -> T): Result<T> =
-        withContext(ioDispatcher) {
+        withContext(Dispatchers.IO) {
             return@withContext try {
-                Result.success(block())
+                val data = block()
+                Result.success(data)
             } catch (e: Exception) {
                 Result.failure(e)
             }

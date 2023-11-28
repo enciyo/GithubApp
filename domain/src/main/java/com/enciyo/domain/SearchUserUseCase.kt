@@ -9,7 +9,8 @@ class SearchUserUseCase @Inject constructor(private val repository: Repository) 
     operator fun invoke(page: Int, username: String) =
         combine(
             repository.getUsers(page, username),
-            repository.getFavorites().map { it.getOrNull()?.users.orEmpty() },
+            repository.getFavorites()
+                .map { it.getOrNull()?.users.orEmpty() },
             ::transform
         )
 

@@ -56,6 +56,7 @@ interface NetworkModule {
         @Provides
         fun provideHttpClient(flipperProvider: FlipperProvider): OkHttpClient =
             OkHttpClient.Builder()
+                .retryOnConnectionFailure(true)
                 .addInterceptor(flipperProvider.get())
                 .build()
 
