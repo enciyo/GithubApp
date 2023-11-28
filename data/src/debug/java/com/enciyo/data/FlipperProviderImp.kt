@@ -2,6 +2,7 @@ package com.enciyo.data
 
 import android.content.Context
 import android.os.Build
+import com.enciyo.data.remote.FlipperProvider
 import com.enciyo.shared.runWithMinSdk
 import com.facebook.flipper.android.AndroidFlipperClient
 import com.facebook.flipper.plugins.crashreporter.CrashReporterPlugin
@@ -29,7 +30,6 @@ class FlipperProviderImp @Inject constructor(@ApplicationContext private val con
             client.addPlugin(DatabasesFlipperPlugin(context))
             client.addPlugin(CrashReporterPlugin.getInstance())
             client.start()
-
         }
         return FlipperOkhttpInterceptor(networkInspector, true)
     }

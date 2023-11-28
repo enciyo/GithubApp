@@ -30,8 +30,11 @@ class AppPlugin : BasePlugin() {
             libs.androidx.navigation.ui.ktx,
             libs.lifecycle.livedata.ktx,
             libs.lifecycle.viewmodel.ktx,
-            libs.viewbindingpropertydelegate.full
+            libs.viewbindingpropertydelegate.full,
+            libs.androidx.core.splashscreen,
+            libs.glide
         )
+
 
     override fun beforeApply(target: Project) {
         super.beforeApply(target)
@@ -39,6 +42,7 @@ class AppPlugin : BasePlugin() {
     }
     override fun afterApply(target: Project) {
         implementationProject(":data")
+        implementationProject(":domain")
     }
 
 }

@@ -13,7 +13,7 @@ class LibraryPlugin : BasePlugin(isEnableLogging = true) {
         get() = listOf(
             libs.plugins.com.android.library,
             libs.plugins.org.jetbrains.kotlin.android,
-            DaggerHiltPlugin::class.java
+            DaggerHiltPlugin::class.java,
         )
 
     override val implementations: List<Any>

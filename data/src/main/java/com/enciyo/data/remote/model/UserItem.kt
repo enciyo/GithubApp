@@ -3,7 +3,7 @@ package com.enciyo.data.remote.model
 
 import com.squareup.moshi.Json
 
-data class User(
+data class UserItem(
     @Json(name = "login")
     val login: String,
     @Json(name = "id")

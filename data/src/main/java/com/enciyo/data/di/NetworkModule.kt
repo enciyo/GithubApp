@@ -1,8 +1,10 @@
 package com.enciyo.data.di
 
-import com.enciyo.data.FlipperProvider
 import com.enciyo.data.FlipperProviderImp
+import com.enciyo.data.remote.FlipperProvider
 import com.enciyo.data.remote.GithubService
+import com.enciyo.data.remote.RemoteDataSource
+import com.enciyo.data.remote.RemoteDataSourceImp
 import com.enciyo.data.remote.adapter.ResultCallAdapterFactory
 import com.enciyo.shared.annotation.NetworkScope
 import com.squareup.moshi.Moshi
@@ -27,9 +29,12 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 interface NetworkModule {
 
-    @Singleton
     @Binds
     fun bindFlipperProvider(flipperProviderImp: FlipperProviderImp): FlipperProvider
+
+    @Binds
+    @Singleton
+    fun bindRemoteDataSource(remoteDataSourceImp: RemoteDataSourceImp) :RemoteDataSource
 
     companion object {
 
@@ -55,6 +60,7 @@ interface NetworkModule {
                 .build()
 
         @Provides
+        @Singleton
         fun provideRetrofit(
             client: OkHttpClient,
             converter: Converter.Factory,
@@ -68,6 +74,7 @@ interface NetworkModule {
                 .build()
 
         @Provides
+        @Singleton
         fun provideGithubService(retrofit: Retrofit): GithubService =
             retrofit.create()
     }

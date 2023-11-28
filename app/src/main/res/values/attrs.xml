@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ImageViewComp">
+        <attr name="isCircle" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ListItemComp">
+        <attr name="leading" format="enum">
+            <enum name="none" value="0" />
+            <enum name="image" value="1" />
+            <enum name="icon" value="2" />
+        </attr>
+
+        <attr name="condition" format="enum">
+            <enum name="oneLine" value="0" />
+            <enum name="twoLine" value="1" />
+        </attr>
+
+        <attr name="trailing" format="enum">
+            <enum name="none" value="0" />
+            <enum name="icon" value="1" />
+        </attr>
+
+        <attr name="leadingImg" format="reference"/>
+        <attr name="leadingIcon" format="reference"/>
+
+        <attr name="headline" format="string"/>
+        <attr name="supportingText" format="string"/>
+
+        <attr name="trailingSupportingText" format="string"/>
+        <attr name="trailingIcon" format="reference"/>
+
+
+    </declare-styleable>
+
+</resources>

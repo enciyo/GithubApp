@@ -1,0 +1,7 @@
+<inset android:drawable="@drawable/vc_github_mark"
+    android:insetLeft="32dp"
+    android:insetTop="32dp"
+    android:insetRight="32dp"
+    android:insetBottom="32dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
+

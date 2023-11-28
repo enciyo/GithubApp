@@ -1,4 +1,4 @@
-package com.enciyo.data
+package com.enciyo.data.remote
 
 import okhttp3.Interceptor
 
