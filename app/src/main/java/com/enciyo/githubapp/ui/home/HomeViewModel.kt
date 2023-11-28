@@ -8,7 +8,7 @@ import com.enciyo.domain.applyFavorites
 import com.enciyo.domain.model.User
 import com.enciyo.domain.usecases.SearchUserUseCase
 import com.enciyo.githubapp.R
-import com.enciyo.githubapp.ui.base.BaseViewModel
+import com.enciyo.githubapp.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

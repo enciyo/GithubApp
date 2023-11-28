@@ -1,4 +1,4 @@
-package com.enciyo.githubapp.ui.adapter
+package com.enciyo.githubapp.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

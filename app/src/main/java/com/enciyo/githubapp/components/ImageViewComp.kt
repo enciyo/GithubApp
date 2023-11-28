@@ -1,4 +1,4 @@
-package com.enciyo.githubapp.ui.components
+package com.enciyo.githubapp.components
 
 import android.content.Context
 import android.util.AttributeSet

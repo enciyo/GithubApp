@@ -13,7 +13,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <com.enciyo.githubapp.ui.components.ImageViewComp
+        <com.enciyo.githubapp.components.ImageViewComp
             android:id="@+id/leadingImage"
             android:layout_width="56dp"
             android:layout_height="56dp"
@@ -23,7 +23,7 @@
             tools:src="@drawable/vc_github_mark"
             tools:visibility="gone" />
 
-        <com.enciyo.githubapp.ui.components.ImageViewComp
+        <com.enciyo.githubapp.components.ImageViewComp
             android:id="@+id/leadingIcon"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -76,7 +76,7 @@
             tools:text="100+"
             tools:visibility="visible" />
 
-        <com.enciyo.githubapp.ui.components.ImageViewComp
+        <com.enciyo.githubapp.components.ImageViewComp
             android:id="@+id/trailingIcon"
             android:layout_width="24dp"
             android:layout_height="24dp"

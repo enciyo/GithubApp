@@ -1,4 +1,4 @@
-package com.enciyo.githubapp.ui.base
+package com.enciyo.githubapp.base
 
 import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment

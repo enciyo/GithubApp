@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.enciyo.domain.Repository
 import com.enciyo.domain.model.User
-import com.enciyo.githubapp.ui.base.BaseViewModel
+import com.enciyo.githubapp.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import javax.inject.Inject

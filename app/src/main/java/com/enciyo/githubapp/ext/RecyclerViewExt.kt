@@ -1,4 +1,4 @@
-package com.enciyo.githubapp.ui.ext
+package com.enciyo.githubapp.ext
 
 
 import android.graphics.Canvas

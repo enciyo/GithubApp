@@ -1,4 +1,4 @@
-package com.enciyo.githubapp.ui.base
+package com.enciyo.githubapp.base
 
 import android.os.Bundle
 import android.view.View

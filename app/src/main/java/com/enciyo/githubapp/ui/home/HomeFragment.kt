@@ -2,16 +2,16 @@ package com.enciyo.githubapp.ui.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.addCallback
 import androidx.recyclerview.widget.ConcatAdapter
 import com.enciyo.githubapp.R
 import com.enciyo.githubapp.databinding.FragmentHomeBinding
-import com.enciyo.githubapp.ui.adapter.UserAdapter
-import com.enciyo.githubapp.ui.base.BaseFragment
+import com.enciyo.githubapp.base.BaseFragment
 import com.enciyo.githubapp.ui.detail.UserDetailFragmentDirections
-import com.enciyo.githubapp.ui.ext.attach
-import com.enciyo.githubapp.ui.ext.detach
-import com.enciyo.githubapp.ui.ext.endlessScrollListener
-import com.enciyo.githubapp.ui.ext.linearLayoutManager
+import com.enciyo.githubapp.ext.attach
+import com.enciyo.githubapp.ext.detach
+import com.enciyo.githubapp.ext.endlessScrollListener
+import com.enciyo.githubapp.ext.linearLayoutManager
 import com.enciyo.githubapp.ui.search.SearchFragment
 import com.enciyo.githubapp.ui.search.SearchFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,7 +38,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.root.progress = progress
@@ -56,7 +55,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 
         vm.state.observe(viewLifecycleOwner, ::observeState)
 
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
+            if (binding.searchBar.text.isNotEmpty()) {
+                vm.init()
+            }else{
+                remove()
+                handleOnBackPressed()
+            }
+        }
+
     }
+
 
     private fun observeState(state: HomeViewModel.HomeUiState) {
         binding.users.post {

@@ -6,7 +6,7 @@ import androidx.lifecycle.SavedStateHandle
 import com.enciyo.domain.Repository
 import com.enciyo.domain.model.UserDetail
 import com.enciyo.domain.usecases.UserDetailUseCase
-import com.enciyo.githubapp.ui.base.BaseViewModel
+import com.enciyo.githubapp.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

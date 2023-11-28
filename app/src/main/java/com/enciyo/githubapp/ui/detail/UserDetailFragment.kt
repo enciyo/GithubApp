@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.enciyo.domain.model.UserDetail
 import com.enciyo.githubapp.R
 import com.enciyo.githubapp.databinding.FragmentUserDetailBinding
-import com.enciyo.githubapp.ui.base.BaseFragment
+import com.enciyo.githubapp.base.BaseFragment
 import com.enciyo.shared.openTwitter
 import com.enciyo.shared.openUrl
 import com.enciyo.shared.share
