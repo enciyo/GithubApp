@@ -1,23 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <com.google.android.material.search.SearchView
-        android:id="@+id/search"
+        android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:defaultQueryHint="Deneme"
-        app:queryHint="dsadsa"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:text="sadkaskda"
-            android:layout_height="wrap_content"/>
+        android:hint="@string/search_hint">
 
     </com.google.android.material.search.SearchView>
 

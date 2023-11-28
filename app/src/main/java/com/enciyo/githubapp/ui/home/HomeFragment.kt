@@ -47,9 +47,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             vm.search(it)
         }
 
-
         binding.searchBar.setOnClickListener {
-
             findNavController().navigate(SearchFragmentDirections.actionGlobalSearchFragment(binding.searchBar.text.toString()))
         }
 
