@@ -12,7 +12,10 @@ import plugins.LibraryPlugin
 class DataPlugin : BasePlugin(){
 
     override val pluginList: List<Any>
-        get() = listOf(LibraryPlugin::class.java)
+        get() = listOf(
+            LibraryPlugin::class.java,
+            libs.plugins.kotlin.kapt
+        )
 
     override val implementations: List<Any> get() = listOf(
         libs.retrofit,
@@ -32,6 +35,7 @@ class DataPlugin : BasePlugin(){
 
     override fun afterApply(target: Project) {
         implementationProject(":shared")
+        implementationProject(":domain")
         debugImplementation(libs.flipper)
         debugImplementation(libs.soloader)
         debugImplementation(libs.flipper.network.plugin)

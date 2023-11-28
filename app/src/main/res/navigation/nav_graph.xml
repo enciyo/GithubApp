@@ -7,7 +7,12 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.enciyo.githubapp.ui.HomeFragment"
+        android:name="com.enciyo.githubapp.ui.home.HomeFragment"
         android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/homeFragment2"
+        android:name="com.enciyo.githubapp.ui.search.SearchFragment"
         tools:layout="@layout/fragment_home" />
 </navigation>

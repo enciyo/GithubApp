@@ -13,12 +13,14 @@ import plugins.BasePlugin
 
 class AppPlugin : BasePlugin() {
 
-    override val pluginList: List<Any> get() = listOf(
-        libs.plugins.com.android.application,
-        libs.plugins.org.jetbrains.kotlin.android,
-        libs.plugins.navigation.safeargs.kotlin,
-        DaggerHiltPlugin::class.java,
-    )
+    override val pluginList: List<Any>
+        get() = listOf(
+            libs.plugins.com.android.application,
+            libs.plugins.org.jetbrains.kotlin.android,
+            libs.plugins.navigation.safeargs.kotlin,
+            DaggerHiltPlugin::class.java,
+            libs.plugins.kotlin.kapt
+        )
 
     override val implementations: List<Any>
         get() = listOf(
@@ -30,15 +32,21 @@ class AppPlugin : BasePlugin() {
             libs.androidx.navigation.ui.ktx,
             libs.lifecycle.livedata.ktx,
             libs.lifecycle.viewmodel.ktx,
-            libs.viewbindingpropertydelegate.full
+            libs.viewbindingpropertydelegate.full,
+            libs.androidx.core.splashscreen,
+            libs.glide,
+            libs.androidx.recyclerview
         )
+
 
     override fun beforeApply(target: Project) {
         super.beforeApply(target)
         applicationExt.configure()
     }
+
     override fun afterApply(target: Project) {
-        implementationProject(":data")
+        implementationProject(":data") // Not correct by Uncle Bob Arch but need for compilers
+        implementationProject(":domain")
     }
 
 }
