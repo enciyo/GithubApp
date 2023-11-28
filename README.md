@@ -1,8 +1,8 @@
-# SatellitesApp
+# GithubApp
 
 
 <!-- TOC -->
-* [SatellitesApp](#satellitesapp)
+* [GithubApp](#githubapp)
 * [Images](#images)
 * [Introduction](#introduction)
   * [Built With 🛠](#built-with-)
