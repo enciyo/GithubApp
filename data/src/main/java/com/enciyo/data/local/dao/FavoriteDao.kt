@@ -24,11 +24,5 @@ interface FavoriteDao {
     @Query("select * from FavoriteEntity")
     fun getAll(): Flow<List<FavoriteEntity>>
 
-    @Query("select * from FavoriteEntity")
-    suspend fun getAllSuspend(): List<FavoriteEntity>
-
-
-    @Query("SELECT count(*) from FavoriteEntity")
-    suspend fun getCount(): Int
 
 }

@@ -21,7 +21,7 @@ fun SearchResponse.toUsers(
 }
 
 fun SearchItemResponse.toUser() = User(
-    id = id,
+    id = this.id,
     username = this.login,
     imageUrl = this.avatarUrl,
     isFavorite = false

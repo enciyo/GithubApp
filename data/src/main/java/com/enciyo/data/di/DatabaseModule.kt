@@ -40,6 +40,9 @@ interface DatabaseModule {
         @Provides
         fun provideFavoriteDao(githubDatabase: GithubDatabase) = githubDatabase.favoriteDao
 
+        @Provides
+        fun provideUserDetailDao(githubDatabase: GithubDatabase) = githubDatabase.userDetailDao
+
     }
 
 }

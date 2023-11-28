@@ -1,12 +1,17 @@
 package com.enciyo.data.local
 
+import android.util.Log
 import com.enciyo.data.local.dao.FavoriteDao
 import com.enciyo.data.local.dao.UserDao
+import com.enciyo.data.local.dao.UserDetailDao
 import com.enciyo.data.local.entity.FavoriteEntity
-import com.enciyo.data.local.entity.UserEntity
+import com.enciyo.data.local.entity.UserDetailEntity
+import com.enciyo.data.local.entity.UsersEntity
 import com.enciyo.data.local.mapper.toFavoriteEntity
 import com.enciyo.data.local.mapper.toUser
+import com.enciyo.data.local.mapper.toUserDetailEntity
 import com.enciyo.data.local.mapper.toUserEntity
+import com.enciyo.data.remote.PER_PAGE
 import com.enciyo.domain.model.User
 import com.enciyo.domain.model.UserDetail
 import com.enciyo.domain.model.Users
@@ -27,25 +32,37 @@ import javax.inject.Inject
 class LocalDataSourceImp @Inject constructor(
     @Dispatcher(GitDispatchers.IO) private val ioDispatcher: CoroutineDispatcher,
     private val userDao: UserDao,
-    private val favorite: FavoriteDao
+    private val favorite: FavoriteDao,
+    private val userDetailDao: UserDetailDao
 ) : LocalDataSource {
 
     override suspend fun insertUsers(user: Users) =
-        toResult {
-            userDao.insert(user = user.users.map { it.toUserEntity() }.toTypedArray())
-        }
+        toResult { userDao.insert(user = user.users.map { it.toUserEntity() }.toTypedArray()) }
 
-    override suspend fun getUsers(): Result<Users> = toResult {
-        Users(
-            userDao.getUsers().map(UserEntity::toUser),
-            1,
-            null
-        )
-    }
+    override suspend fun insertUserDetail(user: UserDetail) =
+        toResult { userDetailDao.insert(user.toUserDetailEntity()) }
 
-    override suspend fun deleteAllUsers() = toResult {
-        userDao.deleteAll()
-    }
+
+    override fun getUserDetailById(username: String) =
+        userDetailDao.getByUsername(username)
+            .map(UserDetailEntity::toUserDetailEntity)
+            .toResult()
+
+    override fun getUsersBy(username: String, page: Int, limit: Int) =
+        userDao.getUsers(username, page - 1, limit)
+            .onEmpty { emit(emptyList()) }
+            .map {
+                val totalCount = userDao.totalCount(username, page - 1, limit) ?: 0
+                val totalPage = totalCount / PER_PAGE
+                val nextPage = if (totalPage != 0) page + 1 else null
+                Users(
+                    it.map(UsersEntity::toUser),
+                    currentPage = page,
+                    nextPage = nextPage
+                )
+            }
+            .toResult()
+
 
     override suspend fun favoriteTransaction(user: User, isAdded: Boolean): Result<Unit> =
         toResult {
@@ -70,13 +87,13 @@ class LocalDataSourceImp @Inject constructor(
             .toResult()
 
 
-
     private suspend fun <T> toResult(block: suspend CoroutineScope.() -> T): Result<T> =
         withContext(Dispatchers.IO) {
             return@withContext try {
                 val data = block()
                 Result.success(data)
             } catch (e: Exception) {
+                Log.i("MyLogger", "FromLocal ${e.message}")
                 Result.failure(e)
             }
         }
@@ -84,6 +101,9 @@ class LocalDataSourceImp @Inject constructor(
     private fun <T> Flow<T>.toResult() =
         flowOn(ioDispatcher)
             .map { Result.success(it) }
-            .catch { emit(Result.failure(it)) }
+            .catch {
+                Log.i("MyLogger", "FromLocal ${it.message}")
+                emit(Result.failure(it))
+            }
 
 }

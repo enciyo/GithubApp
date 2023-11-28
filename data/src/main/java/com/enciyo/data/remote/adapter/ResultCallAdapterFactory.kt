@@ -1,5 +1,6 @@
 package com.enciyo.data.remote.adapter
 
+import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -68,6 +69,7 @@ class ResultCallAdapterFactory constructor(private val coroutineScope: Coroutine
                         val result = response.toResult(paramType)
                         callback.onResponse(this@ResultCall, Response.success(result))
                     } catch (e: Exception) {
+                        Log.i("MyLogger","From Remote :${e.message}")
                         val result = Result.failure<T>(e)
                         callback.onResponse(this@ResultCall, Response.success(result))
                     }
