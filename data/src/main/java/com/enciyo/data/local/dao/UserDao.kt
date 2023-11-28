@@ -24,10 +24,10 @@ interface UserDao {
     @Query("DELETE FROM UsersEntity")
     suspend fun deleteAll()
 
-    @Query("SELECT * from UsersEntity WHERE username  LIKE '%' || :username || '%' LIMIT :size OFFSET :page")
+    @Query("SELECT * from UsersEntity WHERE username  LIKE '%' || :username || '%' LIMIT (:page*:size)")
     fun getUsers(username: String, page: Int, size: Int): Flow<List<UsersEntity>>
 
-    @Query("SELECT count(*) from UsersEntity WHERE username  LIKE '%' || :username || '%' LIMIT :size OFFSET :page")
+    @Query("SELECT count(*) from UsersEntity WHERE username  LIKE '%' || :username || '%' LIMIT (:page*:size)")
     suspend fun totalCount(username: String, page: Int, size: Int): Int?
 
 

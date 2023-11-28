@@ -28,7 +28,7 @@ class HomeViewModel @Inject constructor(
             .handle { remote ->
                 stateUpdate { exists ->
                     exists.copy(
-                        users = if (page == 1) remote.users else remote.users + currentState().users,
+                        users = if (page == 1) remote.users else currentState().users + remote.users ,
                         isShowFavorites = remote.users.isEmpty(),
                         searchKeyword = username
                     )

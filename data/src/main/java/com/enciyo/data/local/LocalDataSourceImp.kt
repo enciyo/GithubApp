@@ -49,10 +49,10 @@ class LocalDataSourceImp @Inject constructor(
             .toResult()
 
     override fun getUsersBy(username: String, page: Int, limit: Int) =
-        userDao.getUsers(username, page - 1, limit)
+        userDao.getUsers(username, page, limit)
             .onEmpty { emit(emptyList()) }
             .map {
-                val totalCount = userDao.totalCount(username, page - 1, limit) ?: 0
+                val totalCount = userDao.totalCount(username, page, limit) ?: 0
                 val totalPage = totalCount / PER_PAGE
                 val nextPage = if (totalPage != 0) page + 1 else null
                 Users(

@@ -69,6 +69,5 @@ fun endlessScrollListener(
         override fun onLoadMore(page: Int) {
             onMore(page)
         }
-
     }
 }

@@ -7,9 +7,13 @@ import com.enciyo.domain.Repository
 import com.enciyo.domain.model.User
 import com.enciyo.domain.model.UserDetail
 import com.enciyo.domain.model.Users
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 
@@ -19,12 +23,18 @@ class RepositoryImp @Inject constructor(
 ) : Repository {
 
     //Only first page cached
-    override fun getUsers(page: Int, username: String): Flow<Result<Users>> = flow {
+    override fun getUsers(page: Int, username: String): Flow<Result<Users>> = channelFlow {
         remoteDataSource.searchUser(username, page)
             .onSuccess {
                 localDataSource.insertUsers(it)
             }
-        emitAll(localDataSource.getUsersBy(username, page , PER_PAGE))
+
+        localDataSource.getUsersBy(username, page , PER_PAGE)
+            .onEach {
+                trySend(it)
+            }
+            .launchIn(this)
+        awaitClose {  }
     }
 
     override fun getUsersDetail(username: String) = flow<Result<UserDetail>> {

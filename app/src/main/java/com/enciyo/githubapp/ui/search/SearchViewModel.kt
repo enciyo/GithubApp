@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val repository: Repository,
-) : BaseViewModel(){
+) : BaseViewModel() {
 
     private val _state = MutableLiveData(SearchUiState())
     val state get() = _state as LiveData<SearchUiState>
@@ -28,7 +28,7 @@ class SearchViewModel @Inject constructor(
             .handle { remote ->
                 stateUpdate { exists ->
                     exists.copy(
-                        users = if (page == 1) remote.users else remote.users + currentState().users,
+                        users = if (page == 1) remote.users else currentState().users + remote.users,
                         isShowFavorites = remote.users.isEmpty(),
                         searchKeyword = username
                     )
@@ -53,7 +53,12 @@ class SearchViewModel @Inject constructor(
 
     fun search(keyword: String) {
         vmState = ViewModelState(username = keyword)
-        getUsers(1, keyword)
+        if (keyword.isNotEmpty()) {
+            getUsers(1, keyword)
+        } else {
+            stateUpdate { SearchUiState() }
+        }
+
     }
 
 
