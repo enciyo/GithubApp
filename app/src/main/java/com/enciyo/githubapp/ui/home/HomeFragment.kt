@@ -5,13 +5,13 @@ import android.view.View
 import androidx.activity.addCallback
 import androidx.recyclerview.widget.ConcatAdapter
 import com.enciyo.githubapp.R
-import com.enciyo.githubapp.databinding.FragmentHomeBinding
 import com.enciyo.githubapp.base.BaseFragment
-import com.enciyo.githubapp.ui.detail.UserDetailFragmentDirections
+import com.enciyo.githubapp.databinding.FragmentHomeBinding
 import com.enciyo.githubapp.ext.attach
 import com.enciyo.githubapp.ext.detach
 import com.enciyo.githubapp.ext.endlessScrollListener
 import com.enciyo.githubapp.ext.linearLayoutManager
+import com.enciyo.githubapp.ui.detail.UserDetailFragmentDirections
 import com.enciyo.githubapp.ui.search.SearchFragment
 import com.enciyo.githubapp.ui.search.SearchFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,7 +60,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 vm.init()
             }else{
                 remove()
-                handleOnBackPressed()
+                requireActivity().onBackPressed()
             }
         }
 
