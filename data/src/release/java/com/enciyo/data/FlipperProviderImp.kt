@@ -1,5 +1,7 @@
 package com.enciyo.data
+
 import android.content.Context
+import com.enciyo.data.remote.FlipperProvider
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Interceptor
 import javax.inject.Inject
