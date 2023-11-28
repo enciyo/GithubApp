@@ -1,5 +1,6 @@
 package plugins.modules
 
+import implementationProject
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import plugins.BasePlugin
@@ -12,7 +13,7 @@ class DomainPlugin : BasePlugin() {
         get() = listOf(LibraryPlugin::class.java)
 
     override fun afterApply(target: Project) {
-
+        implementationProject(":shared")
     }
 
 

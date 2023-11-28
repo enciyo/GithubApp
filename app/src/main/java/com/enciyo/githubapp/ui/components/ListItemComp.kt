@@ -67,7 +67,7 @@ class ListItemComp @JvmOverloads constructor(
     var leadingImgUrl:String? = null
         set(value) {
             field = value
-            check(leading == Leading.Image || value == null) { "Leading type is ${leading.name}" }
+            check(leading == Leading.Image || value.isNullOrEmpty()) { "Leading type is ${leading.name}" }
             Glide.with(this).load(value).into(binding.leadingImage)
         }
 
@@ -88,8 +88,9 @@ class ListItemComp @JvmOverloads constructor(
     var supportingText: CharSequence? = null
         set(value) {
             field = value
-            check(condition == Condition.TwoLine || value == null) { "Condition type is ${condition.name}" }
+            check(condition == Condition.TwoLine || value.isNullOrEmpty()) { "Condition type is ${condition.name}" }
             binding.conditionSecondLine.text = value
+            binding.conditionSecondLine.isVisible = value.isNullOrEmpty().not()
         }
 
 

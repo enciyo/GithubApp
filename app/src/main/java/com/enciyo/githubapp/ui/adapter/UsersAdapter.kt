@@ -6,7 +6,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.enciyo.domain.User
+import com.enciyo.domain.model.User
 import com.enciyo.githubapp.R
 import com.enciyo.githubapp.databinding.ItemUserBinding
 

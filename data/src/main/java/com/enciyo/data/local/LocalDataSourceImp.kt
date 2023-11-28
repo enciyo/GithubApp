@@ -7,8 +7,9 @@ import com.enciyo.data.local.entity.UserEntity
 import com.enciyo.data.local.mapper.toFavoriteEntity
 import com.enciyo.data.local.mapper.toUser
 import com.enciyo.data.local.mapper.toUserEntity
-import com.enciyo.domain.User
-import com.enciyo.domain.Users
+import com.enciyo.domain.model.User
+import com.enciyo.domain.model.UserDetail
+import com.enciyo.domain.model.Users
 import com.enciyo.shared.GitDispatchers
 import com.enciyo.shared.annotation.Dispatcher
 import kotlinx.coroutines.CoroutineDispatcher
@@ -47,6 +48,11 @@ class LocalDataSourceImp @Inject constructor(
     }
 
     override suspend fun favoriteTransaction(user: User, isAdded: Boolean): Result<Unit> =
+        toResult {
+            if (isAdded) favorite.insert(user.toFavoriteEntity()) else favorite.delete(user.toFavoriteEntity())
+        }
+
+    override suspend fun favoriteTransaction(user: UserDetail, isAdded: Boolean): Result<Unit> =
         toResult {
             if (isAdded) favorite.insert(user.toFavoriteEntity()) else favorite.delete(user.toFavoriteEntity())
         }
