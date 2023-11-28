@@ -1,7 +1,7 @@
 # SatellitesApp
 
 - You can follow project [Project Board](https://github.com/users/enciyo/projects/4)
-- You can see design below [Project Design Figma](https://github.com/users/enciyo/projects/4)
+- You can see design below [Project Design Figma](https://www.figma.com/file/MIsFyDEJhKm1DrEsxGmCr0/Material-3-Design-Kit-(Community)?type=design&node-id=54695-24851&mode=design&t=9jEE9UF01hJIq7BV-0)
 
 
 
