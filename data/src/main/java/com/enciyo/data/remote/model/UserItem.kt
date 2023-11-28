@@ -7,7 +7,7 @@ data class UserItem(
     @Json(name = "login")
     val login: String,
     @Json(name = "id")
-    val id: Int,
+    val id: Long,
     @Json(name = "node_id")
     val nodeId: String,
     @Json(name = "avatar_url")

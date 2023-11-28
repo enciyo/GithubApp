@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.enciyo.githubapp.ui.components.ListItemComp xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:condition="oneLine"
+    app:leading="icon"
+    app:leadingIcon="@drawable/vc_history"
+    app:trailingIcon="@drawable/arrow_insert"
+    app:trailing="icon" />

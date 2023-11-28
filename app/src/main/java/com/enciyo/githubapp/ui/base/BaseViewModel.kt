@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onCompletion
@@ -20,13 +21,12 @@ abstract class BaseViewModel : ViewModel() {
     fun <I> Flow<Result<I>>.handle(
         isShowLoading: Boolean = true,
         isShowError: Boolean = false,
-        consumer: (I) -> Unit,
-    ) {
-        this
+        consumer: suspend (I) -> Unit,
+    ): Job {
+        return this
             .onEach {
-                when  {
+                when {
                     it.isFailure -> {
-                        //Show UI or record to Firebase
                         Log.i("MyLogger", it.exceptionOrNull()?.message.orEmpty())
                     }
                     it.isSuccess -> consumer.invoke(it.getOrThrow())
@@ -41,6 +41,7 @@ abstract class BaseViewModel : ViewModel() {
             }
             .launchIn(viewModelScope)
     }
+
 
 
 }

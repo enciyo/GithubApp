@@ -35,7 +35,8 @@ class AppPlugin : BasePlugin() {
             libs.viewbindingpropertydelegate.full,
             libs.androidx.core.splashscreen,
             libs.glide,
-            libs.androidx.recyclerview
+            libs.androidx.recyclerview,
+            libs.androidx.lifecycle.viewmodel.savedstate
         )
 
 
@@ -47,6 +48,7 @@ class AppPlugin : BasePlugin() {
     override fun afterApply(target: Project) {
         implementationProject(":data") // Not correct by Uncle Bob Arch but need for compilers
         implementationProject(":domain")
+        implementationProject(":shared")
     }
 
 }

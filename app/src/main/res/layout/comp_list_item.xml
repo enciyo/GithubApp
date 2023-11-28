@@ -42,7 +42,7 @@
 
         <TextView
             android:id="@+id/conditionFirstLine"
-            style="@style/TextAppearance.Material3.BodyLarge"
+            style="@style/TextAppearance.Material3.BodyMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Haylie Westervelt"
@@ -50,7 +50,7 @@
 
         <TextView
             android:id="@+id/conditionSecondLine"
-            style="@style/TextAppearance.Material3.BodyMedium"
+            style="@style/TextAppearance.Material3.BodySmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"

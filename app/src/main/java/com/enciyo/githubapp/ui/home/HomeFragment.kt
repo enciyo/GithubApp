@@ -2,12 +2,12 @@ package com.enciyo.githubapp.ui.home
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import com.enciyo.githubapp.R
 import com.enciyo.githubapp.databinding.FragmentHomeBinding
 import com.enciyo.githubapp.ui.adapter.UserAdapter
 import com.enciyo.githubapp.ui.base.BaseFragment
+import com.enciyo.githubapp.ui.detail.UserDetailFragmentDirections
 import com.enciyo.githubapp.ui.ext.attach
 import com.enciyo.githubapp.ui.ext.detach
 import com.enciyo.githubapp.ui.ext.endlessScrollListener
@@ -37,23 +37,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         vm.loadMore()
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.root.progress = progress
 
         binding.users.attach(concatAdapter, layoutManager, endlessScrollListener)
 
-        SearchFragment.register(this){
+        SearchFragment.register(this) {
             vm.search(it)
         }
 
         binding.searchBar.setOnClickListener {
-            findNavController().navigate(SearchFragmentDirections.actionGlobalSearchFragment(binding.searchBar.text.toString()))
+            SearchFragmentDirections.actionGlobalSearchFragment(binding.searchBar.text.toString())
+                .navigate()
         }
 
         vm.state.observe(viewLifecycleOwner, ::observeState)
 
-        vm.checkFavorites()
     }
 
     private fun observeState(state: HomeViewModel.HomeUiState) {
@@ -70,7 +72,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         binding.searchBar.setText(state.searchKeyword)
         binding.searchBar.setNavigationIcon(state.getNavigationIcon())
         binding.searchBar.setNavigationOnClickListener {
-            if (state.searchKeyword.isNotEmpty()){
+            if (state.searchKeyword.isNotEmpty()) {
                 vm.init()
             }
         }
@@ -79,7 +81,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     private fun onHandleAdapterEvent(event: UserAdapter.Event) {
         when (event) {
             is UserAdapter.Event.AddFavorite -> vm.addFavorite(event.user)
-            is UserAdapter.Event.OnDetail -> Unit
+            is UserAdapter.Event.OnDetail -> UserDetailFragmentDirections.actionGlobalUserDetailFragment(
+                event.user.username
+            ).navigate()
+
             is UserAdapter.Event.RemoveFavorite -> vm.removeFavorite(event.user)
         }
     }

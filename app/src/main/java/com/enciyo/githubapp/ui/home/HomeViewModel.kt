@@ -4,8 +4,9 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.enciyo.domain.Repository
-import com.enciyo.domain.SearchUserUseCase
-import com.enciyo.domain.User
+import com.enciyo.domain.applyFavorites
+import com.enciyo.domain.model.User
+import com.enciyo.domain.usecases.SearchUserUseCase
 import com.enciyo.githubapp.R
 import com.enciyo.githubapp.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,25 +25,31 @@ class HomeViewModel @Inject constructor(
 
     private fun getUsers(page: Int, username: String) {
         searchUserUseCase.invoke(page, username)
-            .handle {
-                val newUsers = if (page == 1) it.users else it.users + _state.value!!.users
-                _state.value =
-                    _state.value!!.copy(
-                        users = newUsers,
-                        isShowFavorites = it.users.isEmpty(),
+            .handle { remote ->
+                stateUpdate { exists ->
+                    exists.copy(
+                        users = if (page == 1) remote.users else remote.users + currentState().users,
+                        isShowFavorites = remote.users.isEmpty(),
                         searchKeyword = username
                     )
+                }
+
                 vmState =
-                    vmState.copy(nextPage = it.nextPage, page = it.currentPage, username = username)
+                    vmState.copy(
+                        nextPage = remote.nextPage,
+                        page = remote.currentPage,
+                        username = username
+                    )
             }
     }
 
+    init {
+        getFavorites()
+    }
 
     fun init() {
         vmState = ViewModelState()
-        _state.value =
-            _state.value!!.copy(users = listOf(), isShowFavorites = true, searchKeyword = "")
-        checkFavorites()
+        stateUpdate { it.copy(users = listOf(), isShowFavorites = true, searchKeyword = "") }
     }
 
     fun search(username: String) {
@@ -67,12 +74,21 @@ class HomeViewModel @Inject constructor(
             .handle { }
     }
 
-    fun checkFavorites() {
+    private fun getFavorites() {
         repository.getFavorites()
-            .handle {
-                _state.value = _state.value!!.copy(favorites = it.users)
+            .handle {local->
+                val usersWithFavorites = currentState().users.applyFavorites(local.users)
+                stateUpdate {
+                    it.copy(users = usersWithFavorites, favorites = local.users)
+                }
             }
     }
+
+    private fun stateUpdate(block: (exists: HomeUiState) -> HomeUiState) {
+        _state.value = block.invoke(currentState())
+    }
+
+    private fun currentState() = _state.value!!
 
     data class HomeUiState(
         val users: List<User> = listOf(),
@@ -91,8 +107,8 @@ class HomeViewModel @Inject constructor(
 
     private data class ViewModelState(
         val nextPage: Int? = null,
-        val page: Int = 1,
+        val page: Int = 0,
         val username: String = ""
     )
-
 }
+

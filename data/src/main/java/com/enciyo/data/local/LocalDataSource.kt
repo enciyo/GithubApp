@@ -1,7 +1,8 @@
 package com.enciyo.data.local
 
-import com.enciyo.domain.User
-import com.enciyo.domain.Users
+import com.enciyo.domain.model.User
+import com.enciyo.domain.model.UserDetail
+import com.enciyo.domain.model.Users
 import kotlinx.coroutines.flow.Flow
 
 interface LocalDataSource {
@@ -11,5 +12,6 @@ interface LocalDataSource {
     suspend fun deleteAllUsers(): Result<Unit>
     suspend fun favoriteTransaction(user: User, isAdded:Boolean) : Result<Unit>
     fun getFavorites() : Flow<Result<Users>>
+    suspend fun favoriteTransaction(user: UserDetail, isAdded: Boolean): Result<Unit>
 }
 
